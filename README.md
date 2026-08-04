@@ -169,6 +169,11 @@ Demo影片僅使用示範資料，不代表正式服務 SLA 或訊息必定即�
 
 Demo notes 與影片素材存放於 repo 的 [`demo/`](demo/) 目錄。
 
+## 操作手冊
+
+- [ClassHub 日常操作 Manual](manuals/classhub-operation-manual.md)
+- [ClassHub 家長邀請手機流程 Manual](manuals/classhub-parent-invite-mobile-manual.md)
+
 ## Runtime Boundary
 
 ClassHub does not include:

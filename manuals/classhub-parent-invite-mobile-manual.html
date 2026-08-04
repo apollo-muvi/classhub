@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ClassHub 家長邀請手機流程</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --soft: #eef5f8;
+        --fg: #172033;
+        --muted: #657086;
+        --border: #dce4ee;
+        --accent: #0f8a7a;
+        --accent-strong: #096b5f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 18px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 14px;
+        padding: 14px 0 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .mark {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        background: white;
+        color: var(--accent);
+        font-weight: 900;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 0;
+        font-size: clamp(1.65rem, 7vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 8px;
+        font-size: 1.18rem;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.7;
+      }
+
+      .tabs {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        border-block: 1px solid var(--border);
+        background: color-mix(in srgb, var(--bg), white 28%);
+        padding: 10px 0;
+      }
+
+      .tabs button {
+        min-height: 40px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--fg);
+        padding: 0 12px;
+        white-space: nowrap;
+      }
+
+      .tabs button.active {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: white;
+      }
+
+      .layout {
+        display: grid;
+        gap: 14px;
+        padding: 16px 0 26px;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 14px;
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: grid;
+        gap: 14px;
+      }
+
+      .step-copy {
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .shot {
+        display: grid;
+        justify-items: center;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--soft);
+        padding: 10px;
+      }
+
+      .shot img {
+        width: min(390px, 100%);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+      }
+
+      .action-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .action-row a,
+      .action-row button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--fg);
+        padding: 0 14px;
+        text-decoration: none;
+      }
+
+      .action-row .primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: white;
+      }
+
+      .summary {
+        display: grid;
+        gap: 10px;
+      }
+
+      .summary li {
+        margin-bottom: 6px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      @media (min-width: 820px) {
+        .layout {
+          grid-template-columns: 280px minmax(0, 1fr);
+          align-items: start;
+        }
+
+        .tabs {
+          position: sticky;
+          top: 16px;
+          display: grid;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          background: white;
+          padding: 10px;
+        }
+
+        .tabs button {
+          justify-content: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="brand">
+          <div class="mark">CH</div>
+          <div>
+            <h1>ClassHub 家長邀請手機流程</h1>
+          </div>
+        </div>
+        <p class="lead">
+          給老師、教練在手機上使用：建立家長邀請後，產生 QR Code 或邀請連結，
+          可用 LINE、Email、Facebook 或任何手機分享方式傳給家長。
+        </p>
+      </section>
+
+      <section class="layout">
+        <nav class="tabs" aria-label="流程步驟">
+          <button type="button" class="active" data-step="0">1. 教師登入</button>
+          <button type="button" data-step="1">2. 選班級</button>
+          <button type="button" data-step="2">3. 建立邀請</button>
+          <button type="button" data-step="3">4. QR 與分享</button>
+          <button type="button" data-step="4">5. 家長開啟</button>
+          <button type="button" data-step="5">6. 完成綁定</button>
+          <button type="button" data-step="6">重點摘要</button>
+        </nav>
+
+        <section class="card">
+          <article class="step active">
+            <div>
+              <h2>1. 教師用手機登入</h2>
+              <p class="step-copy">輸入 ClassHub ID 與密碼，登入後會看到班級狀態。</p>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/01-mobile-teacher-login.png" alt="教師手機登入畫面" />
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/02-mobile-teacher-status.png" alt="教師登入後狀態" />
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <h2>2. 選定或建立班級</h2>
+              <p class="step-copy">教師至少需要一個班級。可在「班級」選擇既有班級，或直接建立新班級。</p>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/03-mobile-class-selected.png" alt="手機班級設定畫面" />
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <h2>3. 建立家長邀請</h2>
+              <p class="step-copy">
+                在「連結與邀請」選班級。學生可選「新增學生」並輸入新學生姓名，也可選既有學生。
+                填家長姓名後，按「建立家長並產生邀請碼」。
+              </p>
+              <ul>
+                <li>新學生 + 新家長：選班級，學生選「新增學生」，填學生與家長。</li>
+                <li>舊有學生 + 新家長：選班級，學生選既有學生，只填新家長。</li>
+                <li>同一學生多位家長：對同一位學生重複新增不同家長。</li>
+              </ul>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/04-mobile-link-parent.png" alt="手機建立學生家長連結" />
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <h2>4. 產生 QR Code 並分享</h2>
+              <p class="step-copy">
+                建立家長邀請成功後，老師會看到家長邀請 QR Code、邀請連結、分享按鈕與複製連結按鈕。
+                若學生與家長已經存在於「既有連結」，可選該組「學生 / 家長」後按「重新產生邀請碼」。
+                戶外或手機情境不需要貼一大串文字。
+              </p>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/05-mobile-invite-qr-share.png" alt="手機家長邀請 QR Code 與分享" />
+            </div>
+            <div class="action-row">
+              <button type="button" class="primary" id="shareExample">手機分享會叫出 LINE、Email、FB 等 App</button>
+              <a href="#parent-open">家長收到後怎麼開</a>
+            </div>
+          </article>
+
+          <article class="step" id="parent-open">
+            <div>
+              <h2>5. 家長用手機開啟邀請</h2>
+              <p class="step-copy">
+                家長點連結或掃 QR Code 後，手機瀏覽器會開啟 ClassHub 家長頁，並自動帶入 ClassHub ID 與邀請碼。
+                家長只要按「綁定家長」。
+              </p>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/06-mobile-parent-open-invite.png" alt="家長手機開啟邀請" />
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <h2>6. 家長完成綁定</h2>
+              <p class="step-copy">綁定完成後，家長可進入家長頁查看今日事項與通知。</p>
+            </div>
+            <div class="shot">
+              <img src="assets/parent-invite-mobile/07-mobile-parent-bound.png" alt="家長手機完成綁定" />
+            </div>
+          </article>
+
+          <article class="step summary">
+            <div>
+              <h2>重點摘要</h2>
+              <ul>
+                <li>「建立家長邀請」是主要入口：選班級、選新增或既有學生、填家長、產生邀請。</li>
+                <li>「既有連結」只用來重新產生已存在綁定的邀請碼。</li>
+                <li>下方「學生與家長」管理區只用來更新或刪除資料，不是邀請入口。</li>
+                <li>舊有學生要新增家長時，在「建立家長邀請」選既有學生，再填新家長姓名。</li>
+                <li>老師在手機上產生邀請後，可以直接讓家長掃 QR Code。</li>
+                <li>遠端邀請可按「分享」，用 LINE、Email、Facebook 或任何手機 App 傳送。</li>
+                <li>不支援分享的裝置，可用「複製連結」貼到通訊 App。</li>
+                <li>家長點連結或掃 QR Code 後，會自動進家長頁並預填邀請碼。</li>
+                <li>家長只需要按「綁定家長」，不需要手動輸入長邀請碼。</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const tabs = Array.from(document.querySelectorAll(".tabs button"));
+      const steps = Array.from(document.querySelectorAll(".step"));
+
+      function activate(index) {
+        tabs.forEach((tab, tabIndex) => tab.classList.toggle("active", tabIndex === index));
+        steps.forEach((step, stepIndex) => step.classList.toggle("active", stepIndex === index));
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activate(index));
+      });
+
+      document.getElementById("shareExample").addEventListener("click", async () => {
+        const data = {
+          title: "ClassHub 家長邀請",
+          text: "ClassHub 會使用手機系統分享面板，老師可選 LINE、Email、Facebook 或其他 App。",
+          url: window.location.href,
+        };
+        if (navigator.share) {
+          await navigator.share(data).catch(() => {});
+          return;
+        }
+        await navigator.clipboard?.writeText(window.location.href);
+      });
+    </script>
+  </body>
+</html>

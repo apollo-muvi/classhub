@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClassHub 日常操作 Manual</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2939;
+      --muted: #667085;
+      --line: #d0d5dd;
+      --soft: #f5f7fb;
+      --accent: #166534;
+      --accent-soft: #dcfce7;
+      --warn: #92400e;
+      --warn-soft: #fef3c7;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1, h2, h3 {
+      line-height: 1.25;
+      margin: 0;
+    }
+    h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    h3 {
+      font-size: 18px;
+      margin-top: 24px;
+    }
+    p, ul, ol {
+      margin: 10px 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    code {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+    .caution {
+      background: var(--warn-soft);
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 28px 16px 48px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ClassHub 日常操作 Manual</h1>
+    <p class="meta">日期：2026-08-04</p>
+    <div class="notice">
+      本 manual 說明老師、教練、社團管理者與服務管理人員的日常操作。ClassHub 是 RWD 網頁服務，不是手機 App；家長透過瀏覽器開啟家長頁查看今日事項與圖片。
+    </div>
+    <p>家長邀請手機流程請參考 <a href="classhub-parent-invite-mobile-manual.html">classhub-parent-invite-mobile-manual.html</a> 或 <a href="classhub-parent-invite-mobile-manual.md">classhub-parent-invite-mobile-manual.md</a>。</p>
+
+    <h2>角色與前提</h2>
+    <ul>
+      <li>管理者或老師已取得 ClassHub ID 與密碼。</li>
+      <li>ClassHub 帳號已通過申請審核並啟用。</li>
+      <li>老師已使用瀏覽器登入 ClassHub。</li>
+      <li>至少建立一個班級或社團。</li>
+      <li>家長端需先完成邀請綁定，才可查看對應學生的今日事項。</li>
+    </ul>
+
+    <h2>服務邊界</h2>
+    <div class="caution">
+      ClassHub 不是 App，不提供手機系統推播；LINE OA 是選配通知入口，完整內容仍以 ClassHub 家長頁為準。ClassHub 不應作為緊急通知、即時救援或唯一正式通知管道。
+    </div>
+    <ul>
+      <li>系統會盡力即時顯示與傳遞訊息，但網路、裝置、第三方平台或系統狀況可能造成延遲。</li>
+      <li>LINE 官方帳號、訊息額度、平台規則與相關費用不在 ClassHub 免費服務範圍內。</li>
+      <li>重要資料應由使用者自行備份。</li>
+    </ul>
+
+    <h2>免費帳號限制</h2>
+    <div class="grid">
+      <div class="box">每個帳號最多 50 位學生。</div>
+      <div class="box">每位學生最多綁定 3 位家長。</div>
+      <div class="box">每個帳號每天最多發布 30 則訊息。</div>
+      <div class="box">每則訊息最多附加 3 張圖片。</div>
+      <div class="box">教師上傳圖片預設保留 24 小時。</div>
+      <div class="box">帳號最多使用 6 個月，期滿後可重新申請但資料不移轉。</div>
+    </div>
+
+    <h2>老師日常操作流程</h2>
+    <h3>1. 登入</h3>
+    <ol>
+      <li>開啟 ClassHub 網頁。</li>
+      <li>輸入 ClassHub ID 與密碼。</li>
+      <li>按「登入」。</li>
+    </ol>
+    <p>若系統要求更改密碼，請在「更改密碼」區塊輸入新密碼並更新，完成後重新登入。</p>
+
+    <h3>2. 選定或建立班級</h3>
+    <ol>
+      <li>從「選定班級」選擇既有班級。</li>
+      <li>若尚未建立班級，輸入班級名稱後建立。</li>
+      <li>發布、家長邀請與學生管理會以目前選定班級為主要操作範圍。</li>
+    </ol>
+
+    <h3>3. 建立學生與家長邀請</h3>
+    <ol>
+      <li>選擇班級。</li>
+      <li>新學生選「新增學生」並輸入學生稱呼；既有學生直接選擇該學生。</li>
+      <li>輸入家長稱呼，家長電話非必要不建議收集。</li>
+      <li>按「建立家長並產生邀請碼」。</li>
+      <li>用 QR Code、分享按鈕或複製連結交給家長。</li>
+    </ol>
+
+    <h3>4. 發布今日事項</h3>
+    <ol>
+      <li>確認已選定班級。</li>
+      <li>輸入標題、分類與內容。</li>
+      <li>視需要勾選「需要確認」。</li>
+      <li>視需要上傳圖片，最多 3 張。</li>
+      <li>按「發布」。</li>
+    </ol>
+    <p>發布後，家長可在家長頁看到對應事項；老師端可查看已讀與已確認數量。</p>
+
+    <h3>5. 查看與刪除今日貼文</h3>
+    <ul>
+      <li>在「教師今日貼文」查看分類、標題、內容、圖片、收件人數、已讀數與確認數。</li>
+      <li>若內容錯誤，刪除原貼文後重新發布。</li>
+      <li>可刪除單則貼文，也可勾選多則後按「刪除選取」。</li>
+    </ul>
+
+    <h3>6. 管理學生與家長</h3>
+    <ul>
+      <li>學生可更新稱呼、調整班級或刪除。</li>
+      <li>家長可更新稱呼、更新電話或刪除。</li>
+      <li>若只是名稱打錯，優先更新，不要刪除重建。</li>
+      <li>能使用稱呼、代號或暱稱時，不要求真實姓名。</li>
+    </ul>
+
+    <h2>家長日常操作流程</h2>
+    <ol>
+      <li>收到老師提供的 QR Code 或邀請連結。</li>
+      <li>用手機瀏覽器開啟或掃 QR Code。</li>
+      <li>按「綁定家長」。</li>
+      <li>查看「家庭摘要」與「家長今日事項」。</li>
+      <li>若事項要求確認，按「確認」。</li>
+      <li>在「通知」查看未讀通知並標示已讀。</li>
+    </ol>
+
+    <h2>圖片與資料保留</h2>
+    <ul>
+      <li>圖片會重新編碼為 JPEG，移除原始 EXIF metadata。</li>
+      <li>圖片不提供公開原始附件網址。</li>
+      <li>前端取得的是受 API 權限控管的圖片路徑。</li>
+      <li>家長只能查看自己綁定學生可讀的圖片。</li>
+      <li>圖片預設 24 小時後到期，到期後停止顯示並由清理程序刪除。</li>
+    </ul>
+
+    <h2>管理與維運操作</h2>
+    <ul>
+      <li>「清理圖片」：清除已到期圖片。</li>
+      <li>「重送同步」：重送暫時失敗的同步投遞。</li>
+      <li>「重送選配通知」：重送暫時失敗的 LINE OA 選配通知。</li>
+      <li>「載入紀錄」：查看同步紀錄。</li>
+      <li>「載入選配通知」：查看 LINE OA 設定與投遞狀態。</li>
+    </ul>
+
+    <h2>帳號申請與審核操作</h2>
+    <ul>
+      <li>確認申請人 Email 是否可聯絡。</li>
+      <li>確認使用場景是否符合班級、社團、教練或教學溝通。</li>
+      <li>確認申請內容是否疑似垃圾註冊、廣告、濫用或不當用途。</li>
+      <li>不要在申請階段收集學生名單、家長名單、家長電話、詳細地址、身分證明文件、預計班級數、預計學生或家長數、LINE OA 使用需求。</li>
+    </ul>
+
+    <h2>常見問題</h2>
+    <h3>家長說沒有收到通知</h3>
+    <p>ClassHub 不是 App，不提供手機系統推播。請先請家長打開 ClassHub 家長頁並按重新整理。若使用 LINE OA，LINE 只作為選配通知入口，可能因平台、網路或設定造成延遲。</p>
+    <h3>家長看不到今日事項</h3>
+    <p>檢查家長是否已完成綁定、老師是否發布到正確班級、學生是否仍為 active、家長是否綁定到該學生，以及家長頁是否使用正確 ClassHub ID。</p>
+    <h3>圖片看不到</h3>
+    <p>檢查圖片是否已超過保留時間、家長是否有該學生的存取權、圖片是否上傳成功，以及是否已執行清理圖片。</p>
+    <h3>今日發布失敗</h3>
+    <p>檢查是否已選班級、今日發布數是否已達 30 則、是否已有學生與家長綁定、圖片是否超過張數或大小限制，以及後端服務是否正常。</p>
+
+    <h2>相關文件</h2>
+    <ul>
+      <li><a href="classhub-parent-invite-mobile-manual.html">classhub-parent-invite-mobile-manual.html</a></li>
+      <li><a href="../README.md">../README.md</a></li>
+      <li><a href="../index.html">../index.html</a></li>
+    </ul>
+  </main>
+</body>
+</html>
