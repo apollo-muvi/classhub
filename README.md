@@ -2,7 +2,7 @@
 
 > 免費申請使用的班級與社團聯絡服務，協助老師、教練與社團更簡單地與家長溝通。
 
-申請頁：[`index.html`](index.html)
+申請頁：<https://apollo-muvi.github.io/classhub/>
 
 ClassHub 是一個輕量級的班級與社團聯絡工具，協助老師、教練與社團集中發布公告、作業、提醒、圖片與家長通知。
 
