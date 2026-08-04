@@ -126,7 +126,8 @@ main {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   margin: 0;
   line-height: 1.15;
 }
@@ -138,6 +139,10 @@ h1 {
 
 h2 {
   font-size: 28px;
+}
+
+h3 {
+  font-size: 22px;
 }
 
 p {
@@ -186,6 +191,11 @@ p {
 
 .button.secondary:hover {
   background: #eef2f7;
+}
+
+.button.full {
+  width: 100%;
+  margin-top: 22px;
 }
 
 .hero-panel,
@@ -280,8 +290,20 @@ p {
   font-weight: 900;
 }
 
+.check-list.compact {
+  margin-top: 16px;
+}
+
+.check-list.compact li {
+  margin: 6px 0;
+}
+
 .apply-form {
   padding: 24px;
+}
+
+.google-form-panel p:not(.eyebrow) {
+  color: var(--muted);
 }
 
 .form-grid {

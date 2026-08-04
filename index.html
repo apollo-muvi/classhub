@@ -37,7 +37,14 @@
             目前採免費申請使用，帳號需經審核後開通。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#apply">申請使用</a>
+            <a
+              class="button primary"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeRsUGTRwASgdinpmlWDsRvCjk96X5-KpqfHNt--8MCUYpn2Q/viewform?usp=sf_link"
+              target="_blank"
+              rel="noopener"
+            >
+              申請使用
+            </a>
             <a class="button secondary" href="#demo">觀看 Demo</a>
           </div>
         </div>
@@ -93,94 +100,32 @@
           </ul>
         </div>
 
-        <form id="apply-form" class="apply-form" novalidate>
-          <div class="form-grid">
-            <label>
-              <span>申請人稱呼</span>
-              <input name="applicant_label" autocomplete="name" maxlength="80" required>
-            </label>
-
-            <label>
-              <span>Email</span>
-              <input name="email" type="email" autocomplete="email" maxlength="160" required>
-            </label>
-
-            <label class="full">
-              <span>單位類型</span>
-              <select name="organization_type" required>
-                <option value="">請選擇</option>
-                <option>學校</option>
-                <option>補習班</option>
-                <option>安親班</option>
-                <option>家教</option>
-                <option>社團</option>
-                <option>教練</option>
-                <option>其他</option>
-              </select>
-            </label>
-
-            <label class="full">
-              <span>使用場景簡述</span>
-              <textarea
-                name="use_case"
-                rows="5"
-                maxlength="1000"
-                required
-                placeholder="例如：社團每週課程通知、補習班每日聯絡簿、教練課前提醒。請勿填入學生或家長個資。"
-              ></textarea>
-              <small data-counter-for="use_case">0 / 1000</small>
-            </label>
-
-            <label class="full">
-              <span>補充說明（選填）</span>
-              <textarea
-                name="notes"
-                rows="4"
-                maxlength="1000"
-                placeholder="可補充申請背景。請勿提供學生名單、家長名單、電話、地址或身分證明。"
-              ></textarea>
-              <small data-counter-for="notes">0 / 1000</small>
-            </label>
-
-            <label class="trap" aria-hidden="true">
-              <span>Website</span>
-              <input name="website" tabindex="-1" autocomplete="off">
-            </label>
-          </div>
-
-          <fieldset>
-            <legend>申請前請確認</legend>
-            <label class="checkbox">
-              <input name="agree_review" type="checkbox" required>
-              <span>我了解 ClassHub 採申請制，帳號需經審核後才會開通。</span>
-            </label>
-            <label class="checkbox">
-              <input name="agree_limits" type="checkbox" required>
-              <span>我了解免費服務有學生數、發布次數、圖片、資料保留與帳號期限限制。</span>
-            </label>
-            <label class="checkbox">
-              <input name="agree_non_emergency" type="checkbox" required>
-              <span>我了解 ClassHub 不應作為緊急通知、即時救援或唯一正式通知管道。</span>
-            </label>
-            <label class="checkbox">
-              <input name="agree_backup" type="checkbox" required>
-              <span>我了解重要資料需自行備份，帳號或資料移除後可能無法復原。</span>
-            </label>
-          </fieldset>
-
-          <div class="form-actions">
-            <button class="button primary" type="submit">產生申請內容</button>
-            <button class="button secondary" type="reset">清除</button>
-          </div>
-
-          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-
-          <label id="summary-wrap" class="summary-wrap hidden">
-            <span>申請摘要</span>
-            <textarea id="application-summary" readonly rows="10"></textarea>
-          </label>
-          <button id="copy-summary" class="button secondary hidden" type="button">複製申請摘要</button>
-        </form>
+        <aside class="apply-form google-form-panel" aria-label="Google Form 申請入口">
+          <p class="eyebrow">Google Form</p>
+          <h3>前往申請表</h3>
+          <p>
+            申請會透過 Google Form 收集，送出後會進入 ClassHub 審核流程。
+            請只填必要資料，不要提供學生或家長個資。
+          </p>
+          <ul class="check-list compact">
+            <li>申請人稱呼</li>
+            <li>Email</li>
+            <li>單位類型</li>
+            <li>使用場景簡述</li>
+            <li>免費服務限制確認</li>
+          </ul>
+          <a
+            class="button primary full"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeRsUGTRwASgdinpmlWDsRvCjk96X5-KpqfHNt--8MCUYpn2Q/viewform?usp=sf_link"
+            target="_blank"
+            rel="noopener"
+          >
+            開啟 Google Form 申請
+          </a>
+          <p class="form-status">
+            表單由 Google Forms 提供。ClassHub 仍保留拒絕申請、限制使用、暫停帳號或終止服務的權利。
+          </p>
+        </aside>
       </section>
 
       <section id="limits" class="limits-section">
@@ -217,7 +162,5 @@
       <a href="manuals/classhub-operation-manual.html">日常操作 Manual</a>
       <a href="manuals/classhub-parent-invite-mobile-manual.html">家長邀請 Manual</a>
     </footer>
-
-    <script src="apply.js"></script>
   </body>
 </html>
