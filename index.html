@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ClassHub 免費申請使用</title>
+    <meta
+      name="description"
+      content="ClassHub 是免費申請使用的班級與社團聯絡服務，採申請審核制，協助老師、教練與社團更簡單地與家長溝通。"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="ClassHub">
+        <span class="brand-mark" aria-hidden="true">CH</span>
+        <span>
+          <strong>ClassHub</strong>
+          <small>免費申請使用</small>
+        </span>
+      </a>
+      <nav aria-label="頁面導覽">
+        <a href="#apply">申請</a>
+        <a href="#limits">限制</a>
+        <a href="#demo">Demo</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">RWD Web / 不需安裝 App</p>
+          <h1>班級與社團聯絡，簡單發布，家長打開就看得到。</h1>
+          <p>
+            ClassHub 協助老師、教練與社團集中發布公告、作業、提醒、圖片與家長通知。
+            目前採免費申請使用，帳號需經審核後開通。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#apply">申請使用</a>
+            <a class="button secondary" href="#demo">觀看 Demo</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="服務重點">
+          <dl>
+            <div>
+              <dt>最多學生</dt>
+              <dd>50 位</dd>
+            </div>
+            <div>
+              <dt>每日發布</dt>
+              <dd>30 則</dd>
+            </div>
+            <div>
+              <dt>圖片保留</dt>
+              <dd>24 小時</dd>
+            </div>
+          </dl>
+          <p>
+            免費服務以固定資源提供，優先維持核心流程穩定、安全與清楚。
+          </p>
+        </aside>
+      </section>
+
+      <section class="section-grid" aria-label="服務定位">
+        <article>
+          <h2>適合誰使用</h2>
+          <p>學校、補習班、安親班、家教老師、社團教練，以及需要簡單班級溝通系統的團隊。</p>
+        </article>
+        <article>
+          <h2>不是手機 App</h2>
+          <p>ClassHub 是 Web-based 服務，不提供 App Store / Google Play App，也不提供系統層級手機推播。</p>
+        </article>
+        <article>
+          <h2>不是緊急通知</h2>
+          <p>訊息會盡力即時顯示與傳遞，但網路、裝置、LINE OA 或系統狀況可能造成延遲或無法送達。</p>
+        </article>
+      </section>
+
+      <section id="apply" class="apply-layout">
+        <div class="apply-copy">
+          <p class="eyebrow">申請審核制</p>
+          <h2>申請免費使用 ClassHub</h2>
+          <p>
+            申請階段只收必要資料。請不要提供學生名單、家長名單、家長電話、
+            詳細地址、身分證明文件、預計班級數、預計學生 / 家長數，或 LINE OA 使用需求。
+          </p>
+          <ul class="check-list">
+            <li>帳號需經審核後開通</li>
+            <li>每個帳號最長使用 6 個月</li>
+            <li>期滿後可重新申請，但舊資料不移轉</li>
+            <li>重要資料請自行備份</li>
+          </ul>
+        </div>
+
+        <form id="apply-form" class="apply-form" novalidate>
+          <div class="form-grid">
+            <label>
+              <span>申請人稱呼</span>
+              <input name="applicant_label" autocomplete="name" maxlength="80" required>
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" autocomplete="email" maxlength="160" required>
+            </label>
+
+            <label class="full">
+              <span>單位類型</span>
+              <select name="organization_type" required>
+                <option value="">請選擇</option>
+                <option>學校</option>
+                <option>補習班</option>
+                <option>安親班</option>
+                <option>家教</option>
+                <option>社團</option>
+                <option>教練</option>
+                <option>其他</option>
+              </select>
+            </label>
+
+            <label class="full">
+              <span>使用場景簡述</span>
+              <textarea
+                name="use_case"
+                rows="5"
+                maxlength="1000"
+                required
+                placeholder="例如：社團每週課程通知、補習班每日聯絡簿、教練課前提醒。請勿填入學生或家長個資。"
+              ></textarea>
+              <small data-counter-for="use_case">0 / 1000</small>
+            </label>
+
+            <label class="full">
+              <span>補充說明（選填）</span>
+              <textarea
+                name="notes"
+                rows="4"
+                maxlength="1000"
+                placeholder="可補充申請背景。請勿提供學生名單、家長名單、電話、地址或身分證明。"
+              ></textarea>
+              <small data-counter-for="notes">0 / 1000</small>
+            </label>
+
+            <label class="trap" aria-hidden="true">
+              <span>Website</span>
+              <input name="website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>申請前請確認</legend>
+            <label class="checkbox">
+              <input name="agree_review" type="checkbox" required>
+              <span>我了解 ClassHub 採申請制，帳號需經審核後才會開通。</span>
+            </label>
+            <label class="checkbox">
+              <input name="agree_limits" type="checkbox" required>
+              <span>我了解免費服務有學生數、發布次數、圖片、資料保留與帳號期限限制。</span>
+            </label>
+            <label class="checkbox">
+              <input name="agree_non_emergency" type="checkbox" required>
+              <span>我了解 ClassHub 不應作為緊急通知、即時救援或唯一正式通知管道。</span>
+            </label>
+            <label class="checkbox">
+              <input name="agree_backup" type="checkbox" required>
+              <span>我了解重要資料需自行備份，帳號或資料移除後可能無法復原。</span>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="button primary" type="submit">產生申請內容</button>
+            <button class="button secondary" type="reset">清除</button>
+          </div>
+
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+
+          <label id="summary-wrap" class="summary-wrap hidden">
+            <span>申請摘要</span>
+            <textarea id="application-summary" readonly rows="10"></textarea>
+          </label>
+          <button id="copy-summary" class="button secondary hidden" type="button">複製申請摘要</button>
+        </form>
+      </section>
+
+      <section id="limits" class="limits-section">
+        <div>
+          <p class="eyebrow">固定資源 / 公平使用</p>
+          <h2>免費方案限制</h2>
+          <p>免費不代表無限制。ClassHub 會以明確限制維持穩定性，避免少數異常使用影響其他使用者。</p>
+        </div>
+        <ul class="limit-list">
+          <li><strong>50</strong><span>每帳號最多學生</span></li>
+          <li><strong>3</strong><span>每位學生最多家長</span></li>
+          <li><strong>30</strong><span>每日最多發布訊息</span></li>
+          <li><strong>24h</strong><span>教師圖片預設保留</span></li>
+          <li><strong>6m</strong><span>免費帳號最長期限</span></li>
+        </ul>
+      </section>
+
+      <section id="demo" class="demo-section">
+        <div>
+          <p class="eyebrow">Demo 影片</p>
+          <h2>老師發布一次，家長用手機瀏覽器查看</h2>
+          <p>Demo影片僅使用示範資料，不代表正式服務 SLA 或訊息必定即時送達承諾。</p>
+        </div>
+        <video controls preload="metadata" poster="" aria-label="ClassHub Demo 01">
+          <source src="demo/classhub-demo-01.mp4" type="video/mp4">
+          <a href="demo/classhub-demo-01.mp4">下載 Demo 影片</a>
+        </video>
+      </section>
+    </main>
+
+    <footer>
+      <span>ClassHub 目前不是開源專案。</span>
+      <a href="README.md">服務說明</a>
+    </footer>
+
+    <script src="apply.js"></script>
+  </body>
+</html>
