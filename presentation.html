@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ClassHub Communication Simplified</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fb;
+        --panel: #ffffff;
+        --ink: #14213d;
+        --muted: #64748b;
+        --line: #dbe3ec;
+        --brand: #0f766e;
+        --brand-dark: #115e59;
+        --brand-soft: #e8f3f1;
+        --accent: #f59e0b;
+        --danger: #b91c1c;
+        --shadow: 0 18px 50px rgba(20, 33, 61, 0.10);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      }
+
+      body {
+        line-height: 1.45;
+      }
+
+      .deck {
+        width: 100%;
+      }
+
+      .slide {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        width: 100vw;
+        min-height: 56.25vw;
+        max-height: 100vh;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        padding: 44px 58px 34px;
+        background:
+          linear-gradient(135deg, rgba(232, 243, 241, 0.78), rgba(247, 248, 251, 0.7) 42%, rgba(255, 255, 255, 0.72)),
+          var(--bg);
+        page-break-after: always;
+      }
+
+      .slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, rgba(15, 118, 110, 0.08), transparent 28%),
+          linear-gradient(180deg, transparent, rgba(20, 33, 61, 0.03));
+      }
+
+      .topbar,
+      .footer,
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .topbar,
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 2px solid var(--brand);
+        border-radius: 8px;
+        color: var(--brand);
+        font-weight: 850;
+        letter-spacing: 0;
+      }
+
+      .brand-text strong,
+      .brand-text small {
+        display: block;
+      }
+
+      .brand-text strong {
+        font-size: 18px;
+        line-height: 1.05;
+      }
+
+      .brand-text small,
+      .eyebrow,
+      .footer,
+      .muted {
+        color: var(--muted);
+      }
+
+      .section-tag {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: 8px 12px;
+        color: var(--brand-dark);
+        font-size: 14px;
+        font-weight: 750;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 430px;
+        gap: 36px;
+        align-items: center;
+        min-height: 0;
+      }
+
+      .content.wide {
+        grid-template-columns: 1fr;
+      }
+
+      .content.compare {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1,
+      h2 {
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin-bottom: 16px;
+        font-size: 64px;
+        line-height: 1.08;
+      }
+
+      h2 {
+        margin-bottom: 18px;
+        font-size: 46px;
+        line-height: 1.14;
+      }
+
+      h3 {
+        margin-bottom: 12px;
+        font-size: 24px;
+      }
+
+      p {
+        margin-bottom: 18px;
+        font-size: 24px;
+      }
+
+      .eyebrow {
+        margin-bottom: 10px;
+        font-size: 17px;
+        font-weight: 850;
+      }
+
+      .lead {
+        max-width: 780px;
+        color: #334155;
+        font-size: 27px;
+      }
+
+      .highlight {
+        color: var(--brand-dark);
+      }
+
+      .panel {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow);
+      }
+
+      .scenario {
+        padding: 24px;
+      }
+
+      .scenario .label {
+        display: inline-flex;
+        margin-bottom: 14px;
+        border-radius: 8px;
+        background: var(--brand-soft);
+        padding: 7px 10px;
+        color: var(--brand-dark);
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .pain-result {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .pain-result div {
+        border-left: 4px solid var(--accent);
+        padding-left: 14px;
+      }
+
+      .pain-result strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+        font-size: 20px;
+      }
+
+      .pain-result span {
+        color: #334155;
+        font-size: 19px;
+      }
+
+      .phone {
+        width: 310px;
+        min-height: 560px;
+        margin-left: auto;
+        border: 12px solid #172033;
+        border-radius: 44px;
+        background: #f8fafc;
+        box-shadow: 0 30px 70px rgba(20, 33, 61, 0.22);
+        padding: 18px;
+      }
+
+      .phone-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .chat-list,
+      .classhub-feed {
+        display: grid;
+        gap: 10px;
+      }
+
+      .bubble {
+        position: relative;
+        border-radius: 8px;
+        background: white;
+        padding: 10px 12px;
+        color: #334155;
+        font-size: 16px;
+        box-shadow: 0 6px 18px rgba(20, 33, 61, 0.08);
+      }
+
+      .bubble.reply {
+        margin-left: 54px;
+        background: #dff8ec;
+      }
+
+      .badge {
+        display: inline-grid;
+        min-width: 36px;
+        height: 24px;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--danger);
+        color: white;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .risk-board,
+      .group-board,
+      .solution-board {
+        display: grid;
+        gap: 14px;
+      }
+
+      .mini-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 16px;
+      }
+
+      .mini-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 21px;
+      }
+
+      .mini-card span {
+        color: #475569;
+        font-size: 17px;
+      }
+
+      .wrong {
+        border-color: rgba(185, 28, 28, 0.28);
+        background: #fff7f7;
+      }
+
+      .right {
+        border-color: rgba(15, 118, 110, 0.32);
+        background: #f3fbfa;
+      }
+
+      .hub-ui {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .status-strip,
+      .tabs,
+      .metrics {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pill,
+      .tab {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 8px 10px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 750;
+      }
+
+      .tab.active,
+      .pill.active {
+        border-color: var(--brand);
+        background: var(--brand);
+        color: white;
+      }
+
+      .feed-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 14px;
+      }
+
+      .feed-item .category {
+        display: inline-flex;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        background: var(--brand-soft);
+        padding: 4px 8px;
+        color: var(--brand-dark);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .feed-item strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 19px;
+      }
+
+      .feed-item p {
+        margin: 0;
+        color: #475569;
+        font-size: 16px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .feature {
+        min-height: 150px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 18px;
+      }
+
+      .feature strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--brand-dark);
+        font-size: 22px;
+      }
+
+      .feature span {
+        color: #475569;
+        font-size: 18px;
+      }
+
+      .browser {
+        padding: 14px;
+      }
+
+      .browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--line);
+      }
+
+      .url {
+        flex: 1;
+        border-radius: 8px;
+        background: var(--bg);
+        padding: 7px 10px;
+      }
+
+      .browser-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding-top: 14px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfdff;
+        padding: 14px;
+      }
+
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 25px;
+      }
+
+      .privacy-list {
+        display: grid;
+        gap: 14px;
+        margin: 22px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .privacy-list li {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 15px 16px;
+        color: #334155;
+        font-size: 19px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        box-shadow: var(--shadow);
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 16px 18px;
+        text-align: left;
+        vertical-align: top;
+        font-size: 18px;
+      }
+
+      th {
+        background: var(--brand-soft);
+        color: var(--brand-dark);
+        font-size: 19px;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      td:first-child {
+        width: 18%;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      td:nth-child(2) {
+        color: #7f1d1d;
+      }
+
+      td:nth-child(3) {
+        color: var(--brand-dark);
+        font-weight: 720;
+      }
+
+      .cta-panel {
+        display: grid;
+        grid-template-columns: 1fr 430px;
+        gap: 28px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .url-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--bg);
+        padding: 18px;
+        color: var(--brand-dark);
+        font-size: 19px;
+        font-weight: 800;
+        word-break: break-all;
+      }
+
+      .cta-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cta-list li {
+        border-left: 4px solid var(--brand);
+        padding-left: 14px;
+        font-size: 21px;
+      }
+
+      .footer {
+        border-top: 1px solid rgba(219, 227, 236, 0.8);
+        padding-top: 14px;
+        font-size: 14px;
+      }
+
+      @page {
+        size: 13.333in 7.5in;
+        margin: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          width: 13.333in;
+          height: 7.5in;
+          background: white;
+        }
+
+        .slide {
+          width: 13.333in;
+          height: 7.5in;
+          min-height: 0;
+          max-height: none;
+          break-after: page;
+        }
+      }
+    </style>
+    <style>
+      /* Slideshow mode */
+      body slideshow-active { }
+      .slide {
+        display: none;
+      }
+      .slide.active {
+        display: grid;
+      }
+      .progress-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        background: var(--brand);
+        width: 0%;
+        z-index: 999;
+        transition: width 0.1s linear;
+      }
+      .nav-hint {
+        position: fixed;
+        bottom: 12px;
+        right: 16px;
+        z-index: 999;
+        color: var(--muted);
+        font-size: 13px;
+        background: rgba(255,255,255,0.8);
+        padding: 4px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        opacity: 1;
+        transition: opacity 2s;
+      }
+      .nav-hint.fade { opacity: 0; }
+      .dot-nav {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 999;
+      }
+      .dot-nav button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid var(--brand);
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.2s;
+      }
+      .dot-nav button.active {
+        background: var(--brand);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck">
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Your Class. Your Clarity.</small></div></div>
+          <div class="section-tag">通訊軟體的溝通困擾</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">情境一：被 LINE 訊息洗版</p>
+            <h1>您是否也正經歷<span class="highlight">訊息海</span>的轟炸？</h1>
+            <p class="lead">重要公告剛發布，就被「收到」、「謝謝老師」與重複問題快速淹沒。</p>
+            <div class="pain-result">
+              <div><strong>痛點</strong><span>晚點進群組的家長找不到重點，老師必須反覆補充同一件事。</span></div>
+              <div><strong>結果</strong><span>資訊破碎，溝通成本被無意義回覆放大。</span></div>
+            </div>
+          </div>
+          <aside class="phone">
+            <div class="phone-header"><span>班級群組</span><span class="badge">99+</span></div>
+            <div class="chat-list">
+              <div class="bubble">明天請帶美術用具與水壺。</div>
+              <div class="bubble reply">收到，謝謝老師</div>
+              <div class="bubble reply">收到</div>
+              <div class="bubble">請問要帶剪刀嗎？</div>
+              <div class="bubble reply">謝謝老師</div>
+              <div class="bubble reply">收到收到</div>
+              <div class="bubble">老師，公告在哪裡？</div>
+              <div class="bubble reply">我也找不到</div>
+            </div>
+          </aside>
+        </div>
+        <footer class="footer"><span>01</span><span>告別溝通惡夢：為什麼您的班級/社團需要 ClassHub？</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>For teachers, coaches, clubs</small></div></div>
+          <div class="section-tag">Distress Scenario</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">情境二：發錯群組</p>
+            <h2>尷尬與風險：<span class="highlight">發錯群組</span>的日常</h2>
+            <p class="lead">同時管理多個班級或社團，一忙就可能把 A 班資訊送到 B 班群組。</p>
+            <div class="pain-result">
+              <div><strong>痛點</strong><span>學生隱私資訊、家長對話或活動細節被送到錯誤對象。</span></div>
+              <div><strong>結果</strong><span>造成資訊外洩的尷尬，也可能引發家長不滿與信任危機。</span></div>
+            </div>
+          </div>
+          <aside class="risk-board">
+            <div class="mini-card wrong"><strong>A 班群組</strong><span>校外教學集合時間、學生回覆與注意事項。</span></div>
+            <div class="mini-card wrong"><strong>B 班群組</strong><span>不該收到 A 班資訊，卻出現在訊息串中。</span></div>
+            <div class="mini-card right"><strong>ClassHub 做法</strong><span>老師先選定班級，再發布到對應家長頁。</span></div>
+          </aside>
+        </div>
+        <footer class="footer"><span>02</span><span>班級與社團溝通需要清楚的發布邊界</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Simple communication hub</small></div></div>
+          <div class="section-tag">Distress Scenario</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">情境三：一堆臨時群組</p>
+            <h2>管理負荷：沒完沒了的<span class="highlight">臨時群組</span></h2>
+            <p class="lead">暑期班、單次比賽、校外教學，每個活動都拉一個新群組，結束後又不敢刪。</p>
+            <div class="pain-result">
+              <div><strong>痛點</strong><span>聯絡人清單混亂，誰還在群組、誰該收到訊息都要人工判斷。</span></div>
+              <div><strong>結果</strong><span>手機儲存空間與心理壓力一起增加，管理者越來越難維持秩序。</span></div>
+            </div>
+          </div>
+          <aside class="group-board">
+            <div class="mini-card"><strong>週六比賽群</strong><span>活動結束後仍留著，怕漏掉照片或家長問題。</span></div>
+            <div class="mini-card"><strong>暑期營隊群</strong><span>成員不再相同，但過去訊息還卡在手機裡。</span></div>
+            <div class="mini-card"><strong>校外教學群</strong><span>臨時通知變成長期負擔。</span></div>
+          </aside>
+        </div>
+        <footer class="footer"><span>03</span><span>溝通工具不應變成管理者的第二份工作</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Web-based contact book</small></div></div>
+          <div class="section-tag">ClassHub 解決方案</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">什麼是 ClassHub？</p>
+            <h2>更純粹的<span class="highlight">聯絡工具</span></h2>
+            <p class="lead">專為老師、教練、社團設計的輕量級聯絡服務，集中發布公告、作業、提醒與圖片。</p>
+            <div class="feature-grid">
+              <div class="feature"><strong>公告</strong><span>把重點放在今日事項，不被聊天洗掉。</span></div>
+              <div class="feature"><strong>圖片</strong><span>用權限控管的 API 讀取，預設 24 小時清理。</span></div>
+              <div class="feature"><strong>家長頁</strong><span>家長透過瀏覽器查看，不需要安裝 App。</span></div>
+            </div>
+          </div>
+          <aside class="panel hub-ui">
+            <div class="status-strip"><span class="pill active">教師 已登入</span><span class="pill">家長 已啟用</span><span class="pill">限流 啟用</span></div>
+            <div class="tabs"><span class="tab active">教師</span><span class="tab">家長</span><span class="tab">管理</span></div>
+            <div class="feed-item"><span class="category">公告</span><strong>明日活動提醒</strong><p>請攜帶水壺、帽子與聯絡簿。</p></div>
+            <div class="feed-item"><span class="category">作業</span><strong>閱讀紀錄</strong><p>完成第 12-15 頁，家長可在今日事項查看。</p></div>
+          </aside>
+        </div>
+        <footer class="footer"><span>04</span><span>讓聯絡簿回歸本質：清楚、集中、可管理</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>RWD web service</small></div></div>
+          <div class="section-tag">優勢一</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">免安裝、跨平台使用</p>
+            <h2>不用 App，<span class="highlight">瀏覽器即開即看</span></h2>
+            <p class="lead">ClassHub 是 RWD 網頁服務，不需要到 App Store 或 Google Play 下載安裝。</p>
+            <div class="pain-result">
+              <div><strong>無負擔</strong><span>手機、平板、電腦都能用瀏覽器開啟。</span></div>
+              <div><strong>一致入口</strong><span>老師發布，家長到 ClassHub 家長頁查看今日訊息。</span></div>
+            </div>
+          </div>
+          <aside class="panel browser">
+            <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">apollo-muvi.github.io/classhub</span></div>
+            <div class="browser-body">
+              <div class="metric"><span>手機</span><strong>RWD</strong></div>
+              <div class="metric"><span>平板</span><strong>OK</strong></div>
+              <div class="metric"><span>電腦</span><strong>OK</strong></div>
+              <div class="metric"><span>App 安裝</span><strong>不需要</strong></div>
+            </div>
+          </aside>
+        </div>
+        <footer class="footer"><span>05</span><span>不是手機 App，不提供系統層級推播</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Clear daily feed</small></div></div>
+          <div class="section-tag">優勢二</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">資訊井然有序</p>
+            <h2>今日事項集中顯示，掌握<span class="highlight">發布狀況</span></h2>
+            <p class="lead">老師在網頁發布訊息，家長透過專屬頁面查看，不再被閒聊洗版。</p>
+            <div class="pain-result">
+              <div><strong>結構化發布</strong><span>公告、作業、提醒、活動與圖片放在同一個清楚版面。</span></div>
+              <div><strong>管理透明</strong><span>老師能集中查看今日提醒、圖片與確認狀態。</span></div>
+            </div>
+          </div>
+          <aside class="panel hub-ui">
+            <div class="metrics"><div class="metric"><span>貼文</span><strong>8</strong></div><div class="metric"><span>收件人</span><strong>42</strong></div><div class="metric"><span>已確認</span><strong>31</strong></div></div>
+            <div class="feed-item"><span class="category">活動</span><strong>週五戶外課</strong><p>請確認孩子是否已備妥雨具與水壺。</p></div>
+            <div class="feed-item"><span class="category">繳費</span><strong>材料費提醒</strong><p>請於本週五前完成繳交。</p></div>
+          </aside>
+        </div>
+        <footer class="footer"><span>06</span><span>重點訊息有固定位置，家長不用在群組中翻找</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Privacy by minimization</small></div></div>
+          <div class="section-tag">優勢三</div>
+        </header>
+        <div class="content">
+          <div>
+            <p class="eyebrow">資料安全與隱私最小化</p>
+            <h2>能不收就不收，能短留就<span class="highlight">不長留</span></h2>
+            <p class="lead">ClassHub 採取資料最小化設計，不強制要求真實姓名，可用稱呼或代號代替。</p>
+            <ul class="privacy-list">
+              <li>圖片由系統控管存取權限，不提供公開原始附件網址。</li>
+              <li>教師上傳圖片預設保留 24 小時，到期後停止顯示並清理。</li>
+              <li>避免收集不必要資料，重要內容由使用者自行備份。</li>
+            </ul>
+          </div>
+          <aside class="panel hub-ui">
+            <div class="mini-card right"><strong>稱呼或代號</strong><span>小安、A01、週六初階班皆可使用。</span></div>
+            <div class="mini-card right"><strong>權限檢查</strong><span>依登入身分與家長綁定關係檢查圖片存取。</span></div>
+            <div class="mini-card right"><strong>資料到期</strong><span>聯絡簿與圖片應有清楚保留與刪除規則。</span></div>
+          </aside>
+        </div>
+        <footer class="footer"><span>07</span><span>免費服務更需要明確限制與安全邊界</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>LINE vs ClassHub</small></div></div>
+          <div class="section-tag">使用體驗對比</div>
+        </header>
+        <div class="content compare">
+          <div>
+            <p class="eyebrow">LINE vs. ClassHub</p>
+            <h2>使用體驗大對決</h2>
+            <table>
+              <thead><tr><th>比較項目</th><th>LINE 群組</th><th>ClassHub</th></tr></thead>
+              <tbody>
+                <tr><td>訊息呈現</td><td>混亂洗版，重要公告容易丟失。</td><td>集中顯示，今日事項一目了然。</td></tr>
+                <tr><td>安裝需求</td><td>必須安裝 App，且佔用空間。</td><td>免安裝，瀏覽器即開即看。</td></tr>
+                <tr><td>成員管理</td><td>需手動拉群，容易加錯人。</td><td>採申請審核制，班級與家長關係更清楚。</td></tr>
+                <tr><td>資料隱私</td><td>成員可互看資訊，圖片長期留在對話中。</td><td>資料最小化，圖片自動清理且權限控管。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <footer class="footer"><span>08</span><span>ClassHub 不是替代所有通訊軟體，而是把聯絡簿流程獨立出來</span></footer>
+      </section>
+
+      <section class="slide">
+        <header class="topbar">
+          <div class="brand"><div class="brand-mark">CH</div><div class="brand-text"><strong>ClassHub</strong><small>Apply for free access</small></div></div>
+          <div class="section-tag">立即開始</div>
+        </header>
+        <div class="content wide">
+          <div class="cta-panel">
+            <div>
+              <p class="eyebrow">申請免費使用 ClassHub</p>
+              <h2>開始您的<span class="highlight">簡單溝通</span>之旅</h2>
+              <ul class="cta-list">
+                <li><strong>免費申請：</strong>目前提供免費方案，供實際教學、班級與社團情境使用。</li>
+                <li><strong>快速上手：</strong>提供操作手冊與 Demo 影片，降低學習門檻。</li>
+                <li><strong>清楚限制：</strong>每日服務時間 06:00-22:00，非緊急通知管道。</li>
+              </ul>
+            </div>
+            <div>
+              <div class="url-card">apollo-muvi.github.io/classhub/</div>
+              <p class="muted" style="margin: 14px 0 0; font-size: 18px;">申請採審核制。請勿在申請階段提供學生名單、家長名單或不必要個資。</p>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>09</span><span>ClassHub | Your Class. Your Clarity.</span></footer>
+      </section>
+    </main>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="nav-hint" id="navHint">← → 切換 · 空白鍵播放/暫停</div>
+    <div class="dot-nav" id="dotNav"></div>
+    <script>
+      (function() {
+        var slides = document.querySelectorAll('.slide');
+        var current = 0;
+        var playing = true;
+        var DURATION = 6000; // ms per slide
+        var timer = null;
+        var progressTimer = null;
+        var progressStart = 0;
+
+        // Build dot nav
+        var dotNav = document.getElementById('dotNav');
+        slides.forEach(function(_, i) {
+          var btn = document.createElement('button');
+          btn.addEventListener('click', function() { goTo(i); play(); });
+          dotNav.appendChild(btn);
+        });
+
+        // Hide nav hint after 4s
+        setTimeout(function() {
+          document.getElementById('navHint').classList.add('fade');
+        }, 4000);
+
+        function show(idx) {
+          slides.forEach(function(s, i) {
+            s.classList.toggle('active', i === idx);
+          });
+          dotNav.querySelectorAll('button').forEach(function(d, i) {
+            d.classList.toggle('active', i === idx);
+          });
+          current = idx;
+        }
+
+        function goTo(idx) {
+          current = (idx + slides.length) % slides.length;
+          show(current);
+          resetProgress();
+        }
+
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        function play() {
+          if (timer) clearInterval(timer);
+          if (progressTimer) clearInterval(progressTimer);
+          playing = true;
+          resetProgress();
+          timer = setInterval(next, DURATION);
+        }
+
+        function pause() {
+          playing = false;
+          if (timer) clearInterval(timer);
+          if (progressTimer) clearInterval(progressTimer);
+        }
+
+        function resetProgress() {
+          var bar = document.getElementById('progressBar');
+          progressStart = Date.now();
+          if (progressTimer) clearInterval(progressTimer);
+          progressTimer = setInterval(function() {
+            if (!playing) return;
+            var elapsed = Date.now() - progressStart;
+            var pct = Math.min(elapsed / DURATION * 100, 100);
+            bar.style.width = pct + '%';
+          }, 50);
+        }
+
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            if (e.key === ' ' && !playing) { play(); return; }
+            next(); play();
+          } else if (e.key === 'ArrowLeft') {
+            prev(); play();
+          } else if (e.key === 'p' || e.key === 'P') {
+            playing ? pause() : play();
+          }
+        });
+
+        // Click left/right half to navigate
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('button, a, .dot-nav')) return;
+          if (e.clientX < window.innerWidth / 2) { prev(); } else { next(); }
+          play();
+        });
+
+        // Init
+        show(0);
+        play();
+      })();
+    </script>
+  </body>
+</html>
