@@ -576,6 +576,93 @@
         font-size: 14px;
       }
 
+      /* ── Mobile RWD ── */
+      @media (max-width: 768px) {
+        .slide {
+          aspect-ratio: auto;
+          min-height: auto;
+          max-height: none;
+          padding: 24px 18px 20px;
+        }
+
+        h1 { font-size: 32px; }
+        h2 { font-size: 26px; }
+        h3 { font-size: 19px; }
+        p  { font-size: 17px; margin-bottom: 12px; }
+
+        .lead { font-size: 18px; max-width: 100%; }
+        .eyebrow { font-size: 15px; }
+
+        .topbar { gap: 10px; flex-wrap: wrap; }
+        .brand-mark { width: 34px; height: 34px; font-size: 14px; }
+        .brand-text strong { font-size: 15px; }
+        .brand-text small { font-size: 12px; }
+        .section-tag { font-size: 12px; padding: 6px 8px; }
+
+        .content {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .content.compare { gap: 14px; }
+
+        .phone {
+          width: 100%;
+          max-width: 300px;
+          min-height: 0;
+          margin: 0 auto;
+          border-width: 8px;
+          border-radius: 32px;
+        }
+
+        .scenario { padding: 14px; }
+        .pain-result strong { font-size: 16px; }
+        .pain-result span { font-size: 15px; }
+
+        .mini-card { padding: 12px; }
+        .mini-card strong { font-size: 16px; }
+        .mini-card span { font-size: 14px; }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-top: 14px;
+        }
+        .feature { min-height: 0; padding: 14px; }
+        .feature strong { font-size: 17px; }
+        .feature span { font-size: 15px; }
+
+        .feed-item { padding: 10px; }
+        .feed-item strong { font-size: 16px; }
+        .feed-item p { font-size: 14px; }
+
+        .hub-ui { padding: 12px; gap: 8px; }
+        .browser-body { grid-template-columns: 1fr; }
+        .metric strong { font-size: 19px; }
+
+        .privacy-list li { font-size: 15px; padding: 12px; }
+
+        table { font-size: 14px; }
+        th, td { padding: 10px 8px; font-size: 14px; }
+        th { font-size: 15px; }
+
+        .cta-panel {
+          grid-template-columns: 1fr;
+          padding: 18px;
+          gap: 16px;
+        }
+        .cta-list li { font-size: 16px; }
+        .url-card { font-size: 15px; }
+
+        .footer { font-size: 12px; flex-wrap: wrap; gap: 6px; }
+      }
+
+      @media (max-width: 380px) {
+        .slide { padding: 18px 12px 16px; }
+        h1 { font-size: 26px; }
+        h2 { font-size: 22px; }
+        .brand-text small { display: none; }
+      }
+
       @page {
         size: 13.333in 7.5in;
         margin: 0;
