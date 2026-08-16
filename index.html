@@ -6,7 +6,7 @@
     <title>ClassHub 免費申請使用</title>
     <meta
       name="description"
-      content="ClassHub 是免費申請使用的班級與社團聯絡服務，採申請審核制，協助老師、教練與社團更簡單地與家長溝通。"
+      content="ClassHub 是免費申請使用的班級與社團聯絡服務，採申請審核制，提供班級模式與群組模式，協助使用者更簡單地與家長或臨時群組溝通。"
     >
     <meta name="robots" content="index, follow">
     <meta name="author" content="ClassHub">
@@ -17,14 +17,14 @@
     <meta property="og:title" content="ClassHub 免費申請使用">
     <meta
       property="og:description"
-      content="免費申請使用的班級與社團聯絡服務，協助老師、教練與社團集中發布公告、作業、提醒與家長通知。"
+      content="免費申請使用的班級與社團聯絡服務，提供班級聯絡簿與群組短期分享。"
     >
     <meta property="og:url" content="https://apollo-muvi.github.io/classhub/">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="ClassHub 免費申請使用">
     <meta
       name="twitter:description"
-      content="ClassHub 是免費申請使用的班級與社團聯絡服務，採申請審核制，協助老師、教練與社團更簡單地與家長溝通。"
+      content="ClassHub 是免費申請使用的班級與社團聯絡服務，提供班級模式與群組短期分享。"
     >
     <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
@@ -35,7 +35,7 @@
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web",
         "url": "https://apollo-muvi.github.io/classhub/",
-        "description": "ClassHub 是免費申請使用的班級與社團聯絡服務，協助老師、教練與社團集中發布公告、作業、提醒、圖片與家長通知。",
+        "description": "ClassHub 是免費申請使用的班級與社團聯絡服務，提供班級聯絡簿與群組短期分享。",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -66,9 +66,9 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">RWD Web / 不需安裝 App</p>
-          <h1>班級與社團聯絡，簡單發布，家長打開就看得到。</h1>
+          <h1>班級聯絡與群組短期分享，打開網頁就能查看。</h1>
           <p>
-            ClassHub 協助老師、教練與社團集中發布公告、作業、提醒、圖片與家長通知。
+            ClassHub 協助使用者在班級模式發布正式聯絡簿，也能在群組模式建立短期公開分享。
             目前採免費申請使用，帳號需經審核後開通。
           </p>
           <div class="hero-actions">
@@ -85,6 +85,10 @@
         </div>
         <aside class="hero-panel" aria-label="服務重點">
           <dl>
+            <div>
+              <dt>版本</dt>
+              <dd>0.2.0</dd>
+            </div>
             <div>
               <dt>最多學生</dt>
               <dd>50 位</dd>
@@ -125,16 +129,16 @@
 
       <section class="section-grid" aria-label="目前功能">
         <article>
-          <h2>名單匯入與 QR Code</h2>
-          <p>老師可從 Google Sheet 匯出 CSV，上傳後先預覽再同步；系統可產生整班家長 QR Code 並列印卡片。</p>
+          <h2>班級模式</h2>
+          <p>使用者可建立班級、匯入 CSV 名單、發布聯絡簿，並產生家長邀請 QR Code。</p>
         </article>
         <article>
-          <h2>確認與簡短回覆</h2>
-          <p>家長在手機瀏覽器查看今日事項，可按確認，也可送出最多 200 字的簡短回覆。</p>
+          <h2>群組模式</h2>
+          <p>不需要學生與家長綁定。建立分享群組後產生短期連結，知道連結的人即可查看，閱讀次數會累計。</p>
         </article>
         <article>
-          <h2>狀態追蹤與資料管理</h2>
-          <p>老師可查看逐位收件人狀態，也可在刪除班級前先確認學生、家長綁定與登入 session 影響摘要。</p>
+          <h2>確認、回覆與狀態</h2>
+          <p>家長可查看今日事項、確認與簡短回覆；使用者可查看收件人狀態與短期分享閱讀次數。</p>
         </article>
       </section>
 
@@ -192,6 +196,7 @@
           <li><strong>50</strong><span>每帳號最多學生</span></li>
           <li><strong>3</strong><span>每位學生最多家長</span></li>
           <li><strong>30</strong><span>每日最多發布訊息</span></li>
+          <li><strong>3d</strong><span>短期分享最長有效</span></li>
           <li><strong>300</strong><span>CSV 單檔最多資料列</span></li>
           <li><strong>24h</strong><span>教師圖片預設保留</span></li>
           <li><strong>6m</strong><span>免費帳號最長期限</span></li>
@@ -202,7 +207,7 @@
       <section id="demo" class="demo-section">
         <div>
           <p class="eyebrow">Demo 影片</p>
-          <h2>老師發布一次，家長用手機瀏覽器查看</h2>
+          <h2>使用者發布一次，家長用手機瀏覽器查看</h2>
           <p>Demo影片僅使用示範資料，不代表正式服務 SLA 或訊息必定即時送達承諾。</p>
         </div>
         <video controls preload="metadata" poster="" aria-label="ClassHub Demo 01">
